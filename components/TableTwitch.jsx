@@ -3,8 +3,9 @@ import { useTable, useSortBy } from "react-table";
 import VideoEmbed from "./videoEmbed";
 
 import tmi from "tmi.js";
+import Thumbnail from "./Thumbnail";
 
-const defaultChannel = "atrioc";
+const defaultChannel = "notthemarmite";
 
 const client = new tmi.Client({
   channels: [defaultChannel],
@@ -44,8 +45,13 @@ export default function TableTwitch() {
           })
           .then((data) => {
             const iframe = <VideoEmbed src={url} />;
+            const thumbnail = (
+              <Thumbnail src={data.items[0].snippet.thumbnails.default.url} />
+            );
             const submittedTime = new Date();
             const chatter = tags.username;
+            console.log(data.items);
+            const channel = data.items[0].snippet.channelTitle;
             const videoLength = "N/A";
             let time =
               submittedTime.getHours() +
@@ -55,7 +61,7 @@ export default function TableTwitch() {
               submittedTime.getSeconds();
             const title = data.items[0].snippet.title;
             setSubmissions((prev) => [
-              { title, iframe, videoLength, chatter, time },
+              { title, iframe, videoLength, chatter, time, channel, thumbnail },
               ...prev,
             ]);
           });
@@ -82,10 +88,12 @@ export default function TableTwitch() {
 
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
 
-  console.log(submissions);
-
   const columns = React.useMemo(
     () => [
+      {
+        Header: "",
+        accessor: "thumbnail",
+      },
       {
         Header: "Title",
         accessor: "title",
@@ -97,6 +105,10 @@ export default function TableTwitch() {
       {
         Header: "Length",
         accessor: "videoLength",
+      },
+      {
+        Header: "Channel",
+        accessor: "channel",
       },
       {
         Header: "Submitted by",
