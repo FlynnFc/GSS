@@ -26,6 +26,7 @@ export default function TableTwitch() {
   }, []);
 
   useEffect(() => {
+    const subMitter = async (tags, message) => {
       if (message.includes("https://www.youtube.com/")) {
         const url = messageParser(message);
         const YOUTUBE_VIDEO_ITEMS =
