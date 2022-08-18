@@ -4,7 +4,7 @@ import VideoEmbed from "./videoEmbed";
 
 import tmi from "tmi.js";
 
-const defaultChannel = "atrioc";
+const defaultChannel = "notthemarmite";
 
 const client = new tmi.Client({
   channels: [defaultChannel],
@@ -28,12 +28,14 @@ export default function TableTwitch() {
   useEffect(() => {
     const subMitter = async (tags, message) => {
       if (message.includes("https://www.youtube.com/")) {
-        const url = messageParser(message);
-        const YOUTUBE_VIDEO_ITEMS =
-          "https://youtube.googleapis.com/youtube/v3/videos";
-        fetch(
-          `${YOUTUBE_VIDEO_ITEMS}?part=snippet&id=3Wb9l18KoxI&key=AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4`
-        )
+        let regExp =
+          /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+        let match = message.match(regExp);
+        const url = match && match[7].length == 11 ? match[7] : false;
+
+        const ytfetchurl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${url}&key=AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4`;
+
+        fetch(ytfetchurl)
           .then((res) => {
             if (res.ok) {
               return res.json();
@@ -41,7 +43,7 @@ export default function TableTwitch() {
             throw response;
           })
           .then((data) => {
-            console.log(data.items[0]);
+            const iframe = <VideoEmbed src={url} />;
             const submittedTime = new Date();
             const chatter = tags.username;
             const videoLength = "N/A";
@@ -53,7 +55,7 @@ export default function TableTwitch() {
               submittedTime.getSeconds();
             const title = data.items[0].snippet.title;
             setSubmissions((prev) => [
-              { title, url, videoLength, chatter, time },
+              { title, iframe, videoLength, chatter, time },
               ...prev,
             ]);
           });
@@ -66,7 +68,6 @@ export default function TableTwitch() {
         return;
       }
       setChatMessages((prev) => [{ channel, tags, message }, ...prev]);
-
       subMitter(tags, message);
     };
 
@@ -77,26 +78,11 @@ export default function TableTwitch() {
     return () => client.off("message", messageHandler);
   }, [chatMessages, isClientReady, urlChecker, urlID, videoTitle]);
 
-  const messageParser = (submittedURL) => {
-    var regExp =
-      /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-    var match = submittedURL.match(regExp);
-    const url = match && match[7].length == 11 ? match[7] : false;
-    setURLID(() => url);
-    return <VideoEmbed src={url} />;
-  };
+  const messageParser = (submittedURL) => {};
 
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
 
-  useEffect(() => {}, [urlID]);
-
-  //   const submissioncolumns = React.useMemo(() => {
-  //     submissions[0]
-  //       ? Object.key(submissions[0]).map((key) => {
-  //           return { Header: key, accessor: key };
-  //         })
-  //       : [];
-  //   }, [submissions]);
+  console.log(submissions);
 
   const columns = React.useMemo(
     () => [
@@ -106,7 +92,7 @@ export default function TableTwitch() {
       },
       {
         Header: "Video",
-        accessor: "url",
+        accessor: "iframe",
       },
       {
         Header: "Length",
