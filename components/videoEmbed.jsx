@@ -3,9 +3,8 @@ import { AiFillEye, AiOutlineCloseCircle } from "react-icons/ai";
 import { ImSpinner6 } from "react-icons/im";
 
 const VideoEmbed = (props) => {
-  const [ishidden, setHidden] = useState(true);
+  const [ishidden, setHidden] = useState(false);
 
-  console.log(props.src);
   const linkParser = () => {
     //remove & replace watch?v= with embed/
   };
@@ -36,9 +35,11 @@ const VideoEmbed = (props) => {
           <>
             <ImSpinner6 className="animate-spin z-0 fixed" />
             <iframe
-              className={`${ishidden ? "hidden" : "visible"} z-10`}
-              width="300"
-              height="169"
+              className={`${
+                ishidden ? "hidden" : "visible"
+              } z-10 transition-all overflow-hidden`}
+              width="426"
+              height="240"
               src={props.src}
               title="YouTube video player"
               frameBorder="1"
