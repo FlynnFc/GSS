@@ -2,7 +2,7 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div>
+    <div className="bg-slate-100 h-screen">
       <Component {...pageProps} />
     </div>
   );
