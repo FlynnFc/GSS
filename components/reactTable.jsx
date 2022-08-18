@@ -4,19 +4,6 @@ import VideoEmbed from "./videoEmbed";
 import LongAgo from "./longAgo";
 
 export default function ReactTable() {
-  const tmi = require("tmi.js");
-
-  const client = new tmi.Client({
-    channels: ["notthemarmite"],
-  });
-
-  client.connect();
-
-  client.on("message", (channel, tags, message, self) => {
-    // "Alca: Hello, World!"
-    console.log(`${tags["display-name"]}: ${message}`);
-  });
-
   const [submissions, setSubmissions] = useState([
     {
       videoTitle: "How Does Kodak Apply Light Sensitive Coating to Film?",
@@ -165,7 +152,7 @@ export default function ReactTable() {
             >
               {headerGroup.headers.map((column) => (
                 <th
-                  className="text-slate-900 text-xl py-4"
+                  className="text-white text-xl py-4 bg-slate-500"
                   key={column.Cell}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >

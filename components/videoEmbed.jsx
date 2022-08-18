@@ -3,7 +3,7 @@ import { AiFillEye, AiOutlineCloseCircle } from "react-icons/ai";
 import { ImSpinner6 } from "react-icons/im";
 
 const VideoEmbed = (props) => {
-  const [ishidden, setHidden] = useState(false);
+  const [ishidden, setHidden] = useState(true);
 
   const linkParser = () => {
     //remove & replace watch?v= with embed/
@@ -40,7 +40,7 @@ const VideoEmbed = (props) => {
               } z-10 transition-all overflow-hidden`}
               width="426"
               height="240"
-              src={props.src}
+              src={`https://www.youtube.com/embed/${props.src}`}
               title="YouTube video player"
               frameBorder="1"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
