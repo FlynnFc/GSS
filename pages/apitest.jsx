@@ -7,7 +7,7 @@ const Apitest = () => {
     const YOUTUBE_VIDEO_ITEMS =
       "https://youtube.googleapis.com/youtube/v3/videos";
     fetch(
-      `${YOUTUBE_VIDEO_ITEMS}?part=snippet&id=8YWrmZoUYGs&key=AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4`
+      `${YOUTUBE_VIDEO_ITEMS}?part=snippet&id=${urlID}&key=AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4`
     )
       .then((res) => {
         if (res.ok) {
