@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import VideoEmbed from "./videoEmbed";
-import LongAgo from "./longAgo";
 
 import tmi from "tmi.js";
 
