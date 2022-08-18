@@ -4,6 +4,7 @@ import VideoEmbed from "./videoEmbed";
 
 import tmi from "tmi.js";
 
+const defaultChannel = "atrioc";
 
 const client = new tmi.Client({
   channels: [defaultChannel],
