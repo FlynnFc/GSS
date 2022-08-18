@@ -5,7 +5,7 @@ import LongAgo from "./longAgo";
 
 import tmi from "tmi.js";
 
-const defaultChannel = "notthemarmite";
+const defaultChannel = "atrioc";
 
 const client = new tmi.Client({
   channels: [defaultChannel],
@@ -59,7 +59,7 @@ export default function TableTwitch() {
     }
 
     return () => client.off("message", messageHandler);
-  }, [chatMessages, isClientReady]);
+  }, [chatMessages, isClientReady, urlChecker]);
 
   const messageParser = (submittedURL) => {
     var regExp =
