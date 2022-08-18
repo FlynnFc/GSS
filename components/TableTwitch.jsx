@@ -8,7 +8,7 @@ import Thumbnail from "./Thumbnail";
 const defaultChannel = "notthemarmite";
 
 const client = new tmi.Client({
-  channels: [defaultChannel],
+  channels: [defaultChannel, "atrioc"],
 });
 
 export default function TableTwitch() {
