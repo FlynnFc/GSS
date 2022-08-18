@@ -123,7 +123,7 @@ export default function ReactTable() {
                 {row.cells.map((cell) => {
                   return (
                     <td
-                      className="bg-slate-700 text-center text-white text-xl"
+                      className="bg-slate-700 text-center text-white text-xl p-2"
                       key={cell.value}
                       {...cell.getCellProps()}
                     >

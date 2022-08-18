@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { AiFillEye, AiOutlineCloseCircle } from "react-icons/ai";
-import { ImSpinner2 } from "react-icons/im";
+import { ImSpinner6 } from "react-icons/im";
 
 const VideoEmbed = (props) => {
   const [ishidden, setHidden] = useState(true);
@@ -34,7 +34,7 @@ const VideoEmbed = (props) => {
           <AiFillEye className="cursor-pointer" onClick={hiddenhandler} />
         ) : (
           <>
-            <ImSpinner2 className="animate-spin z-0 fixed" />
+            <ImSpinner6 className="animate-spin z-0 fixed" />
             <iframe
               className={`${ishidden ? "hidden" : "visible"} z-10`}
               width="300"
