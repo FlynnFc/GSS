@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import VideoEmbed from "./videoEmbed";
-import LongAgo from "./longAgo";
+import LongAgo from "./LongAgo";
 
 export default function ReactTable() {
   const [submissions, setSubmissions] = useState([
