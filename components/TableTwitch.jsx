@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import VideoEmbed from "./videoEmbed";
+const td = require("tinyduration");
 
 import tmi from "tmi.js";
 import Thumbnail from "./Thumbnail";
@@ -34,7 +35,7 @@ export default function TableTwitch() {
         let match = message.match(regExp);
         const url = match && match[7].length == 11 ? match[7] : false;
 
-        const ytfetchurl = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${url}&key=AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4`;
+        const ytfetchurl = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&part=snippet&id=${url}&key=AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4`;
 
         fetch(ytfetchurl)
           .then((res) => {
@@ -52,7 +53,12 @@ export default function TableTwitch() {
             const chatter = tags.username;
             console.log(data.items);
             const channel = data.items[0].snippet.channelTitle;
-            const videoLength = "N/A";
+
+            console.log(videoLength);
+            const videoDuration = td.parse(
+              data.items[0].contentDetails.duration
+            );
+            const videoLength = `${videoDuration.minutes} mins ${videoDuration.seconds} secs`;
             let time =
               submittedTime.getHours() +
               ":" +
