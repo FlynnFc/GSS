@@ -57,10 +57,8 @@ export default function TableTwitch() {
             const chatter = (
               <Chatter color={tags.color} username={tags.username} />
             );
-            console.log(data.items);
             const channel = data.items[0].snippet.channelTitle;
 
-            console.log(videoLength);
             const videoDuration = td.parse(
               data.items[0].contentDetails.duration
             );
