@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+td div a img {
+  display: flex;
+  align-self: flex-start;
+  justify-self: start;
+}
