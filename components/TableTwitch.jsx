@@ -148,8 +148,8 @@ export default function TableTwitch() {
     useTable({ columns, data: submissiondata }, useSortBy);
 
   return (
-    <div className="flex justify-center items-center text-white">
-      <table {...getTableProps()} className="w-11/12 shadow-lg">
+    <div className="flex justify-center items-center text-white h-full w-full bg-slate-100">
+      <table {...getTableProps()} className="w-11/12 shadow-lg mb-8">
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr
