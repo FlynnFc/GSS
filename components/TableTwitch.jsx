@@ -52,7 +52,10 @@ export default function TableTwitch() {
             );
             const submittedTime = new Date();
 
-            <Chatter color={tags.color} username={tags.username} />;
+            const chatter = (
+              <Chatter color={tags.color} username={tags.username} />
+            );
+            const title = data.items[0].snippet.title;
             // const chatter = tags.username;
             console.log(data.items);
             const channel = data.items[0].snippet.channelTitle;
@@ -67,11 +70,25 @@ export default function TableTwitch() {
               submittedTime.getMinutes() +
               ":" +
               submittedTime.getSeconds();
-            const title = data.items[0].snippet.title;
-            setSubmissions((prev) => [
-              { title, iframe, videoLength, chatter, time, channel, thumbnail },
-              ...prev,
-            ]);
+            console.log("running logic");
+
+            setSubmissions((prev) => {
+              console.log(prev[0]);
+              if (!prev[0] || prev[0].title !== title) {
+                return [
+                  {
+                    title,
+                    iframe,
+                    videoLength,
+                    chatter,
+                    time,
+                    channel,
+                    thumbnail,
+                  },
+                  ...prev,
+                ];
+              } else return [...prev];
+            });
           });
       } else return;
     };
@@ -92,7 +109,7 @@ export default function TableTwitch() {
     }
 
     return () => client.off("message", messageHandler);
-  }, [chatMessages, isClientReady, urlChecker, urlID, videoTitle]);
+  }, [isClientReady, submissions, urlChecker]);
 
   console.log(submissions);
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
