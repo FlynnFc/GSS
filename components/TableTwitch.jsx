@@ -52,8 +52,7 @@ export default function TableTwitch() {
             );
             const submittedTime = new Date();
 
-            const chatter = tags.username;
-            // <Chatter color={tags.color} username={tags.username} />
+            <Chatter color={tags.color} username={tags.username} />;
             // const chatter = tags.username;
             console.log(data.items);
             const channel = data.items[0].snippet.channelTitle;
@@ -78,12 +77,14 @@ export default function TableTwitch() {
     };
 
     const messageHandler = (channel, tags, message, self) => {
-      setURLChecker((prev) => new Set([message, ...prev]));
-      if (urlChecker.has(message)) {
+      if (self) {
         return;
       }
-      setChatMessages((prev) => [{ channel, tags, message }, ...prev]);
-      subMitter(tags, message);
+      setURLChecker((prev) => new Set([message, ...prev]));
+      if (!urlChecker.has(message)) {
+        setChatMessages((prev) => [{ channel, tags, message }, ...prev]);
+        subMitter(tags, message);
+      }
     };
 
     if (isClientReady) {
