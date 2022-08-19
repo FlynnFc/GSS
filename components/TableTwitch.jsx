@@ -147,7 +147,7 @@ export default function TableTwitch() {
             >
               {headerGroup.headers.map((column) => (
                 <th
-                  className="text-white text-xl py-4 bg-slate-500"
+                  className="text-white text-xl py-4 bg-slate-700"
                   key={column.Cell}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
@@ -169,14 +169,14 @@ export default function TableTwitch() {
             prepareRow(row);
             return (
               <tr
-                className="border-2 border-x-white transition-all"
+                className="transition-all"
                 key={row.id}
                 {...row.getRowProps()}
               >
                 {row.cells.map((cell) => {
                   return (
                     <td
-                      className="bg-white text-center text-slate-900 font-semibold text-xl p-2"
+                      className="bg-white text-center border-b text-slate-900 font-semibold text-xl p-2"
                       key={cell.value}
                       {...cell.getCellProps()}
                     >
