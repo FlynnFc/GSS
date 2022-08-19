@@ -52,9 +52,8 @@ export default function TableTwitch() {
             );
             const submittedTime = new Date();
 
-            const chatter = (
-              <Chatter color={tags.color} username={tags.username} />
-            );
+            const chatter = tags.username;
+            // <Chatter color={tags.color} username={tags.username} />
             // const chatter = tags.username;
             console.log(data.items);
             const channel = data.items[0].snippet.channelTitle;
@@ -94,8 +93,7 @@ export default function TableTwitch() {
     return () => client.off("message", messageHandler);
   }, [chatMessages, isClientReady, urlChecker, urlID, videoTitle]);
 
-  const messageParser = (submittedURL) => {};
-
+  console.log(submissions);
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
 
   const columns = React.useMemo(
