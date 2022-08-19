@@ -5,6 +5,7 @@ const td = require("tinyduration");
 
 import tmi from "tmi.js";
 import Thumbnail from "./Thumbnail";
+import Chatter from "./Chatter";
 
 const defaultChannel = "notthemarmite";
 
@@ -50,14 +51,12 @@ export default function TableTwitch() {
               <Thumbnail src={data.items[0].snippet.thumbnails.default.url} />
             );
             const submittedTime = new Date();
-<<<<<<< HEAD
+
             const chatter = (
               <Chatter color={tags.color} username={tags.username} />
             );
-=======
-            const chatter = tags.username;
+            // const chatter = tags.username;
             console.log(data.items);
->>>>>>> parent of fc83c1d (popularity skeleton added)
             const channel = data.items[0].snippet.channelTitle;
 
             const videoDuration = td.parse(
@@ -177,7 +176,7 @@ export default function TableTwitch() {
                 {row.cells.map((cell) => {
                   return (
                     <td
-                      className="bg-slate-700 text-center text-inherit text-xl p-2"
+                      className="bg-white text-center text-slate-900 font-semibold text-xl p-2"
                       key={cell.value}
                       {...cell.getCellProps()}
                     >
