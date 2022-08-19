@@ -5,7 +5,6 @@ const td = require("tinyduration");
 
 import tmi from "tmi.js";
 import Thumbnail from "./Thumbnail";
-import Chatter from "./Chatter";
 
 const defaultChannel = "notthemarmite";
 
@@ -48,15 +47,17 @@ export default function TableTwitch() {
           .then((data) => {
             const iframe = <VideoEmbed src={url} />;
             const thumbnail = (
-              <Thumbnail
-                vidID={url}
-                src={data.items[0].snippet.thumbnails.medium.url}
-              />
+              <Thumbnail src={data.items[0].snippet.thumbnails.default.url} />
             );
             const submittedTime = new Date();
+<<<<<<< HEAD
             const chatter = (
               <Chatter color={tags.color} username={tags.username} />
             );
+=======
+            const chatter = tags.username;
+            console.log(data.items);
+>>>>>>> parent of fc83c1d (popularity skeleton added)
             const channel = data.items[0].snippet.channelTitle;
 
             const videoDuration = td.parse(
@@ -70,18 +71,8 @@ export default function TableTwitch() {
               ":" +
               submittedTime.getSeconds();
             const title = data.items[0].snippet.title;
-            const popularity = 1;
             setSubmissions((prev) => [
-              {
-                title,
-                iframe,
-                videoLength,
-                chatter,
-                time,
-                channel,
-                thumbnail,
-                popularity,
-              },
+              { title, iframe, videoLength, chatter, time, channel, thumbnail },
               ...prev,
             ]);
           });
@@ -104,6 +95,8 @@ export default function TableTwitch() {
     return () => client.off("message", messageHandler);
   }, [chatMessages, isClientReady, urlChecker, urlID, videoTitle]);
 
+  const messageParser = (submittedURL) => {};
+
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
 
   const columns = React.useMemo(
@@ -117,7 +110,7 @@ export default function TableTwitch() {
         accessor: "title",
       },
       {
-        Header: "Preview",
+        Header: "Video",
         accessor: "iframe",
       },
       {
@@ -136,10 +129,6 @@ export default function TableTwitch() {
         Header: "Time Submitted",
         accessor: "time",
       },
-      // {
-      //   Header: "Popularity",
-      //   accessor: "popularity",
-      // },
     ],
     []
   );
@@ -159,7 +148,7 @@ export default function TableTwitch() {
             >
               {headerGroup.headers.map((column) => (
                 <th
-                  className="text-white text-xl py-4 bg-slate-700 justify-center"
+                  className="text-white text-xl py-4 bg-slate-500"
                   key={column.Cell}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                 >
@@ -180,11 +169,15 @@ export default function TableTwitch() {
           {rows.map((row) => {
             prepareRow(row);
             return (
-              <tr className="" key={row.id} {...row.getRowProps()}>
+              <tr
+                className="border-2 border-x-white transition-all"
+                key={row.id}
+                {...row.getRowProps()}
+              >
                 {row.cells.map((cell) => {
                   return (
                     <td
-                      className="bg-white text-center text-gray-900 text-xl max-w-fit font-semibold border-b"
+                      className="bg-slate-700 text-center text-inherit text-xl p-2"
                       key={cell.value}
                       {...cell.getCellProps()}
                     >

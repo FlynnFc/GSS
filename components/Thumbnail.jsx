@@ -5,19 +5,9 @@ const Thumbnail = (props) => {
   const imgsrc = props.src;
 
   return (
-    <div className="flex items-center justify-center w-full">
-      <a
-        target="_blank"
-        rel="noreferrer"
-        href={`https://www.youtube.com/watch?v=${props.vidID}`}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          style={{ width: "160px", height: "90px" }}
-          alt="thumbnail"
-          src={imgsrc}
-        />
-      </a>
+    <div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img width={120} height={90} alt="thumbnail" src={imgsrc} />
     </div>
   );
 };

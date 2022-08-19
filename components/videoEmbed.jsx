@@ -30,7 +30,7 @@ const VideoEmbed = (props) => {
     <>
       <div className="flex justify-center items-center">
         {ishidden ? (
-          <AiFillEye className="cursor-pointer h-20" onClick={hiddenhandler} />
+          <AiFillEye className="cursor-pointer" onClick={hiddenhandler} />
         ) : (
           <>
             <ImSpinner6 className="animate-spin z-0 fixed" />
@@ -38,8 +38,8 @@ const VideoEmbed = (props) => {
               className={`${
                 ishidden ? "hidden" : "visible"
               } z-10 transition-all overflow-hidden`}
-              width="320"
-              height="180"
+              width="426"
+              height="240"
               src={`https://www.youtube.com/embed/${props.src}`}
               title="YouTube video player"
               frameBorder="1"
@@ -47,7 +47,7 @@ const VideoEmbed = (props) => {
               allowFullScreen
             ></iframe>{" "}
             <AiOutlineCloseCircle
-              className="cursor-pointer z-20 scroll-mb-12"
+              className="cursor-pointer"
               onClick={hiddenhandler}
             />
           </>
