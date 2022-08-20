@@ -8,7 +8,7 @@ const Thumbnail = (props) => {
     <div>
       <a href={url} target="_blank" rel="noreferrer">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img width={250} height={141} alt="thumbnail" src={imgsrc} />
+        <img width={220} height={124} alt="thumbnail" src={imgsrc} />
       </a>
     </div>
   );
