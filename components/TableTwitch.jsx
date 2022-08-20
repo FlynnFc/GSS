@@ -63,7 +63,9 @@ export default function TableTwitch() {
             const videoDuration = td.parse(
               data.items[0].contentDetails.duration
             );
-            const videoLength = `${videoDuration.minutes} mins ${videoDuration.seconds} secs`;
+            const videoLength = `${
+              videoDuration.minutes > 0 ? videoDuration.minutes : 0
+            } mins ${videoDuration.seconds} secs`;
             let time =
               submittedTime.getHours() +
               ":" +
