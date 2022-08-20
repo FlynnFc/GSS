@@ -46,7 +46,10 @@ export default function TableTwitch() {
           .then((data) => {
             const iframe = <VideoEmbed src={url} />;
             const thumbnail = (
-              <Thumbnail src={data.items[0].snippet.thumbnails.default.url} />
+              <Thumbnail
+                url={url}
+                src={data.items[0].snippet.thumbnails.medium.url}
+              />
             );
             const submittedTime = new Date();
 
@@ -161,7 +164,7 @@ export default function TableTwitch() {
     useTable({ columns, data: submissiondata }, useSortBy);
 
   return (
-    <div className="flex justify-center items-center text-white h-full w-full bg-slate-100">
+    <div className="flex justify-center items-center text-white h-full w-full bg-slate-200">
       <table {...getTableProps()} className="w-11/12 shadow-lg mb-8">
         <thead>
           {headerGroups.map((headerGroup) => (
