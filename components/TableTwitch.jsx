@@ -69,13 +69,19 @@ export default function TableTwitch() {
             const videoLength = `${
               videoDuration.minutes > 0 ? videoDuration.minutes : 0
             } mins ${videoDuration.seconds} secs`;
-            let time =
-              submittedTime.getHours() +
-              ":" +
-              submittedTime.getMinutes() +
-              ":" +
-              submittedTime.getSeconds();
-            console.log("running logic");
+            const hours =
+              submittedTime.getHours() < 10
+                ? `0${submittedTime.getHours()}`
+                : submittedTime.getHours();
+            const minutes =
+              submittedTime.getMinutes() < 10
+                ? `0${submittedTime.getMinutes()}`
+                : submittedTime.getMinutes();
+            const seconds =
+              submittedTime.getSeconds() < 10
+                ? `0${submittedTime.getSeconds()}`
+                : submittedTime.getSeconds();
+            let time = `${hours}:${minutes}:${seconds}`;
 
             setSubmissions((prev) => {
               console.log(prev[0]);
