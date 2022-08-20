@@ -97,8 +97,12 @@ export default function TableTwitch() {
       if (self) {
         return;
       }
-      setURLChecker((prev) => new Set([message, ...prev]));
-      if (!urlChecker.has(message)) {
+      let regExp =
+        /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
+      let match = message.match(regExp);
+      const url = match && match[7].length == 11 ? match[7] : false;
+      setURLChecker((prev) => new Set([url, ...prev]));
+      if (!urlChecker.has(url)) {
         setChatMessages((prev) => [{ channel, tags, message }, ...prev]);
         subMitter(tags, message);
       }
