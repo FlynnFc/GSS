@@ -55,7 +55,6 @@ export default function TableTwitch() {
             );
             const title = data.items[0].snippet.title;
             // const chatter = tags.username;
-            console.log(data.items);
             const channel = data.items[0].snippet.channelTitle;
 
             const videoDuration = td.parse(
@@ -63,7 +62,9 @@ export default function TableTwitch() {
             );
             const videoLength = `${
               videoDuration.minutes > 0 ? videoDuration.minutes : 0
-            } mins ${videoDuration.seconds} secs`;
+            } mins ${
+              videoDuration.seconds > 0 ? videoDuration.seconds : 0
+            } secs`;
             const hours =
               submittedTime.getHours() < 10
                 ? `0${submittedTime.getHours()}`
@@ -79,7 +80,6 @@ export default function TableTwitch() {
             let time = `${hours}:${minutes}:${seconds}`;
 
             setSubmissions((prev) => {
-              console.log(prev[0]);
               if (!prev[0] || prev[0].title !== title) {
                 return [
                   {
@@ -121,7 +121,6 @@ export default function TableTwitch() {
     return () => client.off("message", messageHandler);
   }, [isClientReady, submissions, urlChecker]);
 
-  console.log(urlChecker);
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
 
   const columns = React.useMemo(
