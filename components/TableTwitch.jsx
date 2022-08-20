@@ -29,16 +29,11 @@ export default function TableTwitch() {
   }, []);
 
   useEffect(() => {
-    const subMitter = async (tags, message) => {
+    const subMitter = async (tags, url, message) => {
       if (
         message.includes("https://www.youtube.com/") ||
         message.includes("https://youtu.be/")
       ) {
-        let regExp =
-          /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-        let match = message.match(regExp);
-        const url = match && match[7].length == 11 ? match[7] : false;
-
         const ytfetchurl = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&part=snippet&id=${url}&key=AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4`;
 
         fetch(ytfetchurl)
@@ -115,7 +110,7 @@ export default function TableTwitch() {
       setURLChecker((prev) => new Set([url, ...prev]));
       if (!urlChecker.has(url)) {
         setChatMessages((prev) => [{ channel, tags, message }, ...prev]);
-        subMitter(tags, message);
+        subMitter(tags, url, message);
       }
     };
 
@@ -126,7 +121,7 @@ export default function TableTwitch() {
     return () => client.off("message", messageHandler);
   }, [isClientReady, submissions, urlChecker]);
 
-  console.log(submissions);
+  console.log(urlChecker);
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
 
   const columns = React.useMemo(
