@@ -75,7 +75,6 @@ export default function TableTwitch() {
               submittedTime.getMinutes() +
               ":" +
               submittedTime.getSeconds();
-            console.log("running logic");
 
             setSubmissions((prev) => {
               console.log(prev[0]);
