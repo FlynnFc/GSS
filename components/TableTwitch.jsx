@@ -30,7 +30,10 @@ export default function TableTwitch() {
 
   useEffect(() => {
     const subMitter = async (tags, message) => {
-      if (message.includes("https://www.youtube.com/")) {
+      if (
+        message.includes("https://www.youtube.com/") ||
+        message.includes("https://youtu.be/")
+      ) {
         let regExp =
           /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
         let match = message.match(regExp);
