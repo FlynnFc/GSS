@@ -3,11 +3,13 @@ import Image from "next/image";
 
 const Thumbnail = (props) => {
   const imgsrc = props.src;
-
+  const url = `https://www.youtube.com/watch?v=${props.url}`;
   return (
     <div>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img width={120} height={90} alt="thumbnail" src={imgsrc} />
+      <a href={url} target="_blank" rel="noreferrer">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img width={250} height={141} alt="thumbnail" src={imgsrc} />
+      </a>
     </div>
   );
 };
