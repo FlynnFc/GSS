@@ -8,14 +8,19 @@ export default function Home() {
     <div className="h-full">
       <div className="text-3xl text-center py-5 font-bold text-white fixed top-0 bg-slate-700 w-full flex justify-center items-center">
         <h1>Get Smarter Saturday Submissions</h1>
-        <span className="ml-4">
+        <a
+          className="ml-4"
+          target="_blank"
+          href="https://twitter.com/lutafatootoo"
+          rel="noreferrer"
+        >
           <Image
             alt="emoji of pepe frog being smart"
             height={35}
             width={35}
             src={pepoG}
           />
-        </span>
+        </a>
       </div>
       <TableTwitch />
     </div>
