@@ -11,7 +11,7 @@ const VideoEmbed = (props) => {
 
   return (
     <>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-start">
         {ishidden ? (
           <AiFillEye className="cursor-pointer" onClick={hiddenhandler} />
         ) : (
