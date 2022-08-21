@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import VideoEmbed from "./videoEmbed";
+import { BiPause, BiPlay } from "react-icons/bi";
 const td = require("tinyduration");
 
 import tmi from "tmi.js";
@@ -19,6 +20,7 @@ export default function TableTwitch() {
   const [chatMessages, setChatMessages] = useState([]);
   const [urlChecker, setURLChecker] = useState(new Set());
   const [videoTitle, setVideoTitle] = useState("t");
+  const [paused, setPaused] = useState(false);
   const [urlID, setURLID] = useState();
 
   useEffect(() => {
@@ -103,6 +105,9 @@ export default function TableTwitch() {
     };
 
     const messageHandler = (channel, tags, message, self) => {
+      if (paused) {
+        return;
+      }
       if (self) {
         return;
       }
@@ -122,7 +127,7 @@ export default function TableTwitch() {
     }
 
     return () => client.off("message", messageHandler);
-  }, [isClientReady, submissions, urlChecker]);
+  }, [isClientReady, paused, submissions, urlChecker]);
 
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
 
@@ -160,63 +165,83 @@ export default function TableTwitch() {
     []
   );
 
+  const pauseOff = () => {
+    setPaused(() => false);
+  };
+
+  const pauseOn = () => {
+    setPaused(() => true);
+  };
+
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: submissiondata }, useSortBy);
 
   return (
-    <div className="flex justify-center items-center text-white h-full w-full bg-slate-200">
-      <table {...getTableProps()} className="w-11/12 shadow-lg mb-8">
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr
-              className="transition-all"
-              key={headerGroup}
-              {...headerGroup.getHeaderGroupProps()}
-            >
-              {headerGroup.headers.map((column) => (
-                <th
-                  className="text-white text-xl py-4 bg-slate-700"
-                  key={column.Cell}
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                >
-                  {column.render("Header")}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}
-                  </span>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
+    <>
+      <div className="flex justify-center text-3xl">
+        <div className=" cursor-pointer bg-slate-700 rounded-lg m-2">
+          {paused ? (
+            <BiPlay onClick={pauseOff}></BiPlay>
+          ) : (
+            <BiPause onClick={pauseOn}></BiPause>
+          )}
+        </div>
+      </div>
+      <div className="flex justify-center items-center text-white h-full w-full bg-slate-200">
+        <span></span>
+        <table {...getTableProps()} className="w-11/12 shadow-lg mb-8">
+          <thead>
+            {headerGroups.map((headerGroup) => (
               <tr
                 className="transition-all"
-                key={row.id}
-                {...row.getRowProps()}
+                key={headerGroup}
+                {...headerGroup.getHeaderGroupProps()}
               >
-                {row.cells.map((cell) => {
-                  return (
-                    <td
-                      className="bg-white text-center border-b text-slate-900 font-semibold text-xl p-2"
-                      key={cell.value}
-                      {...cell.getCellProps()}
-                    >
-                      {cell.render("Cell")}
-                    </td>
-                  );
-                })}
+                {headerGroup.headers.map((column) => (
+                  <th
+                    className="text-white text-xl py-4 bg-slate-700"
+                    key={column.Cell}
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                  >
+                    {column.render("Header")}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔽"
+                          : " 🔼"
+                        : ""}
+                    </span>
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map((row) => {
+              prepareRow(row);
+              return (
+                <tr
+                  className="transition-all"
+                  key={row.id}
+                  {...row.getRowProps()}
+                >
+                  {row.cells.map((cell) => {
+                    return (
+                      <td
+                        className="bg-white text-center border-b text-slate-900 font-semibold text-xl p-2"
+                        key={cell.value}
+                        {...cell.getCellProps()}
+                      >
+                        {cell.render("Cell")}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </>
   );
 }
