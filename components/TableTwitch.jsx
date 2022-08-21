@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import VideoEmbed from "./videoEmbed";
 import { BiPause, BiPlay } from "react-icons/bi";
+import { BsArrowDownUp } from "react-icons/bs";
 const td = require("tinyduration");
 
 import tmi from "tmi.js";
@@ -179,7 +180,7 @@ export default function TableTwitch() {
   return (
     <>
       <div className="flex justify-center text-3xl">
-        <div className=" cursor-pointer bg-slate-700 rounded-lg m-2">
+        <div className=" cursor-pointer bg-slate-700 rounded-lg m-2 fixed right-3 text-white text-6xl top-0">
           {paused ? (
             <BiPlay onClick={pauseOff}></BiPlay>
           ) : (
@@ -187,8 +188,7 @@ export default function TableTwitch() {
           )}
         </div>
       </div>
-      <div className="flex justify-center items-center text-white h-full w-full bg-slate-200">
-        <span></span>
+      <div className="flex justify-center items-center text-white h-full w-full bg-slate-200 mt-36">
         <table {...getTableProps()} className="w-11/12 shadow-lg mb-8">
           <thead>
             {headerGroups.map((headerGroup) => (

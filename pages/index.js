@@ -1,18 +1,24 @@
 import Head from "next/head";
 import Image from "next/image";
-import ReactTable from "../components/reactTable";
 import TableTwitch from "../components/TableTwitch";
-import EnhancedTable from "../components/tester";
-// import Tablecomponent from "../components/table";
-import styles from "../styles/Home.module.css";
+import pepoG from "../components/images/3x.png";
 
 export default function Home() {
   return (
     <div>
-      <h1 className="text-3xl text-center py-10 font-bold text-slate-700">
-        Get Smarter Saturday Submissions
-      </h1>
+      <div className="text-3xl text-center py-5 font-bold text-white fixed bg-slate-700 w-full flex justify-center items-center">
+        <h1>Get Smarter Saturday Submissions</h1>
+        <span className="ml-4">
+          <Image
+            alt="emoji of pepe frog being smart"
+            height={35}
+            width={35}
+            src={pepoG}
+          />
+        </span>
+      </div>
       <TableTwitch />
+      <footer>test</footer>
     </div>
   );
 }
