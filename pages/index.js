@@ -5,8 +5,8 @@ import pepoG from "../components/images/3x.png";
 
 export default function Home() {
   return (
-    <div>
-      <div className="text-3xl text-center py-5 font-bold text-white fixed bg-slate-700 w-full flex justify-center items-center">
+    <div className="h-full">
+      <div className="text-3xl text-center py-5 font-bold text-white fixed top-0 bg-slate-700 w-full flex justify-center items-center">
         <h1>Get Smarter Saturday Submissions</h1>
         <span className="ml-4">
           <Image
@@ -18,9 +18,6 @@ export default function Home() {
         </span>
       </div>
       <TableTwitch />
-      <footer className="bottom-0 left-2/4 bg-slate-200 flex justify-center">
-        test
-      </footer>
     </div>
   );
 }

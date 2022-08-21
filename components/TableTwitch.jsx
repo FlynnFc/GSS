@@ -178,7 +178,7 @@ export default function TableTwitch() {
     useTable({ columns, data: submissiondata }, useSortBy);
 
   return (
-    <>
+    <div className="h-full">
       <div className="flex justify-center text-3xl">
         <div className=" cursor-pointer bg-slate-700 rounded-lg m-2 fixed right-3 text-white text-6xl top-0">
           {paused ? (
@@ -188,7 +188,7 @@ export default function TableTwitch() {
           )}
         </div>
       </div>
-      <div className="flex justify-center items-center text-white h-full w-full bg-slate-200 mt-36">
+      <div className="flex justify-center items-baseline text-white w-full bg-slate-200 mt-28">
         <table {...getTableProps()} className="w-11/12 shadow-lg mb-8">
           <thead>
             {headerGroups.map((headerGroup) => (
@@ -242,6 +242,6 @@ export default function TableTwitch() {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }

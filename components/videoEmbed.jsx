@@ -5,23 +5,6 @@ import { ImSpinner6 } from "react-icons/im";
 const VideoEmbed = (props) => {
   const [ishidden, setHidden] = useState(true);
 
-  const linkParser = () => {
-    //remove & replace watch?v= with embed/
-  };
-
-  const onPlayerReady = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  };
-
-  const options = {
-    height: "240",
-    width: "426",
-    playerVars: {
-      autoplay: 1,
-    },
-  };
-
   const hiddenhandler = () => {
     setHidden((prevState) => !prevState);
   };
