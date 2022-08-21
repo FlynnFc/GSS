@@ -86,8 +86,9 @@ export default function TableTwitch() {
             let time = `${hours}:${minutes}:${seconds}`;
 
             setSubmissions((prev) => {
-              if (!prev[0] || prev[0].title !== title) {
+              if (!prev[0] || prev[prev.length - 1].title !== title) {
                 return [
+                  ...prev,
                   {
                     title,
                     iframe,
@@ -97,7 +98,6 @@ export default function TableTwitch() {
                     channel,
                     thumbnail,
                   },
-                  ...prev,
                 ];
               } else return [...prev];
             });

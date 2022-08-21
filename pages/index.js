@@ -18,7 +18,9 @@ export default function Home() {
         </span>
       </div>
       <TableTwitch />
-      <footer>test</footer>
+      <footer className="bottom-0 left-2/4 bg-slate-200 flex justify-center">
+        test
+      </footer>
     </div>
   );
 }
