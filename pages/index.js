@@ -10,7 +10,7 @@ export default function Home() {
         <h1>Get Smarter Saturday Submissions</h1>
         <span className="ml-4">
           <Image
-            alt="emoji of pepe frog being smart"
+            alt="emoji of smart pepe frog"
             height={35}
             width={35}
             src={pepoG}
