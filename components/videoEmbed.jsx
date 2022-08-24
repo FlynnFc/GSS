@@ -30,7 +30,7 @@ const VideoEmbed = (props) => {
               allowFullScreen
             ></iframe>{" "}
             <AiOutlineCloseCircle
-              className="cursor-pointer"
+              className="cursor-pointer flex self-baseline"
               onClick={hiddenhandler}
             />
           </>
