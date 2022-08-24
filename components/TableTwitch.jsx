@@ -20,9 +20,7 @@ export default function TableTwitch() {
   const [isClientReady, setIsClientReady] = useState(false);
   const [chatMessages, setChatMessages] = useState([]);
   const [urlChecker, setURLChecker] = useState(new Set());
-  const [videoTitle, setVideoTitle] = useState("t");
   const [paused, setPaused] = useState(false);
-  const [urlID, setURLID] = useState();
 
   useEffect(() => {
     (async () => {
