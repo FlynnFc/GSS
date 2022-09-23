@@ -15,7 +15,7 @@ export default function Home() {
           rel="noreferrer"
         >
           <Image
-            alt="emoji of pepe frog being smart"
+            alt="emoji of smart pepe frog"
             height={35}
             width={35}
             src={pepoG}

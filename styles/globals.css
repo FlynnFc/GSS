@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+th:last-child {
+  margin-left: 0.5rem;
+}
