@@ -35,12 +35,14 @@ export default function TableTwitch() {
   }, []);
 
   useEffect(() => {
+    const key = "AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4";
+    console.log(key);
     const subMitter = async (tags, url, message) => {
       if (
         message.includes("https://www.youtube.com/") ||
         message.includes("https://youtu.be/")
       ) {
-        const ytfetchurl = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&part=snippet&id=${url}&key=AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4`;
+        const ytfetchurl = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&part=snippet&id=${url}&key=${key}`;
 
         fetch(ytfetchurl)
           .then((res) => {
