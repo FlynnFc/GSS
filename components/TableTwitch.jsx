@@ -36,7 +36,6 @@ export default function TableTwitch() {
 
   useEffect(() => {
     const key = "AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4";
-    console.log(key);
     const subMitter = async (tags, url, message) => {
       if (
         message.includes("https://www.youtube.com/") ||

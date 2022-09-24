@@ -57,17 +57,14 @@ export const SavedVideos = (props) => {
     };
     if (!firstLoad) {
       props.urlCheck.forEach((element) => {
-        console.log(dupChecker, element);
         if (!dupChecker.has(element)) {
           setDupChecker((prevState) => new Set([...prevState, element]));
           setTimeout(() => subMitter(element), 50);
         }
       });
     } else setFristLoad(() => false);
-
-    console.log(dupChecker);
   }, [dupChecker, firstLoad, props.urlCheck]);
-  console.log(favSubs);
+
   const submissiondata = useMemo(() => [...favSubs], [favSubs]);
 
   const columns = useMemo(
