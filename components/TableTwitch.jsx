@@ -8,6 +8,8 @@ const td = require("tinyduration");
 import tmi from "tmi.js";
 import Thumbnail from "./Thumbnail";
 import Chatter from "./Chatter";
+import Fav from "./fav";
+import { SavedVideos } from "./SavedVideos";
 
 const defaultChannel = "notthemarmite";
 
@@ -20,6 +22,9 @@ export default function TableTwitch() {
   const [isClientReady, setIsClientReady] = useState(false);
   const [chatMessages, setChatMessages] = useState([]);
   const [urlChecker, setURLChecker] = useState(new Set());
+  const [saveModalOpen, setSaveModalOpen] = useState(false);
+  const [favv, setFav] = useState(false);
+  const [favList, setFavList] = useState(new Set());
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
@@ -30,6 +35,7 @@ export default function TableTwitch() {
   }, []);
 
   useEffect(() => {
+    console.log(favList);
     const subMitter = async (tags, url, message) => {
       if (
         message.includes("https://www.youtube.com/") ||
@@ -45,7 +51,9 @@ export default function TableTwitch() {
             throw response;
           })
           .then((data) => {
-            const iframe = <VideoEmbed src={url} />;
+            const iframe = (
+              <VideoEmbed src={url} setFavList={setFavList} favList={favList} />
+            );
             const thumbnail = (
               <Thumbnail
                 url={url}
@@ -82,12 +90,15 @@ export default function TableTwitch() {
                 ? `0${submittedTime.getSeconds()}`
                 : submittedTime.getSeconds();
             let time = `${hours}:${minutes}:${seconds}`;
-
+            let isFav = false;
+            let fav = <Fav setFav={setFav} />;
             setSubmissions((prev) => {
               if (!prev[0] || prev[prev.length - 1].title !== title) {
                 return [
                   ...prev,
                   {
+                    isFav,
+                    fav,
                     title,
                     iframe,
                     videoLength,
@@ -126,7 +137,7 @@ export default function TableTwitch() {
     }
 
     return () => client.off("message", messageHandler);
-  }, [isClientReady, paused, submissions, urlChecker]);
+  }, [favList, isClientReady, paused, submissions, urlChecker]);
 
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
 
@@ -160,6 +171,10 @@ export default function TableTwitch() {
         Header: "Time Submitted",
         accessor: "time",
       },
+      {
+        Header: "Save",
+        accessor: "fav",
+      },
     ],
     []
   );
@@ -168,21 +183,37 @@ export default function TableTwitch() {
     setPaused(() => false);
   };
 
-  const pauseOn = () => {
+  const pauseOn = (e) => {
     setPaused(() => true);
   };
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data: submissiondata }, useSortBy);
 
+  const savedModalHandler = () => {
+    setSaveModalOpen(true);
+  };
+
   return (
     <div className="h-full">
       <div className="flex justify-center text-3xl">
-        <div className=" cursor-pointer bg-slate-700 rounded-lg m-2 fixed right-3 text-white text-6xl top-0">
+        <div className="bg-slate-700 rounded-lg m-2 fixed right-3 text-white text-6xl top-0 flex items-center">
+          <p
+            className="text-lg bg-yellow-500 rounded text-white font-bold px-2 cursor-pointer"
+            onClick={savedModalHandler}
+          >
+            View saved videos
+          </p>
+          {saveModalOpen ? (
+            <SavedVideos
+              submissions={submissions}
+              setSaveModalOpen={setSaveModalOpen}
+            ></SavedVideos>
+          ) : null}
           {paused ? (
-            <BiPlay onClick={pauseOff}></BiPlay>
+            <BiPlay className="cursor-pointer" onClick={pauseOff}></BiPlay>
           ) : (
-            <BiPause onClick={pauseOn}></BiPause>
+            <BiPause className="cursor-pointer" onClick={pauseOn}></BiPause>
           )}
         </div>
       </div>
@@ -191,7 +222,7 @@ export default function TableTwitch() {
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr
-                className="transition-all"
+                className="transition-all rounded-t-xl"
                 key={headerGroup}
                 {...headerGroup.getHeaderGroupProps()}
               >
@@ -226,7 +257,7 @@ export default function TableTwitch() {
                   {row.cells.map((cell) => {
                     return (
                       <td
-                        className="bg-white text-center border-b text-slate-900 font-semibold text-xl p-2"
+                        className="bg-white text-center border-b text-slate-900 font-semibold text-xl"
                         key={cell.value}
                         {...cell.getCellProps()}
                       >

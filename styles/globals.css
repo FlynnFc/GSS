@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 th:last-child {
-  margin-left: 0.5rem;
+  margin-right: 3rem;
 }

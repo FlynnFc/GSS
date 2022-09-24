@@ -2,16 +2,12 @@ import React, { useState } from "react";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
 const Star = () => {
-  const [favv, setFav] = useState(false);
-
-  const favHandler = () => setFav((prev) => !prev);
-
   return (
     <>
       {favv ? (
-        <AiFillStar onClick={favHandler} />
+        <AiFillStar className="fill-current text-yellow-500" key={fav} />
       ) : (
-        <AiOutlineStar onClick={favHandler} />
+        <AiOutlineStar />
       )}
     </>
   );

@@ -6,8 +6,8 @@ const Chatter = (props) => {
       style={{ backgroundColor: props.color }}
       className={
         props.color
-          ? `text-white rounded-lg p-2 font-semibold mx-3`
-          : `text-slate-900 rounded-lg p-2 font-semibold mx-3`
+          ? `text-white rounded-lg p-2 font-semibold mx-2 text-lg`
+          : `text-slate-900 rounded-lg p-2 font-semibold text-lg mx-2`
       }
     >
       {props.username}
