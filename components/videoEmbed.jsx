@@ -31,13 +31,13 @@ const VideoEmbed = (props) => {
       {" "}
       {isFav ? (
         <AiFillStar
-          className="cursor-pointer"
+          className="cursor-pointer absolute right-[5%]"
           onClick={favHandlerOff}
           id="fav"
         />
       ) : (
         <AiOutlineStar
-          className="cursor-pointer"
+          className="cursor-pointer absolute right-[5%]"
           onClick={favHandlerOn}
           id="notFav"
         />
@@ -56,6 +56,7 @@ const VideoEmbed = (props) => {
               src={`https://www.youtube.com/embed/${props.src}`}
               title="YouTube video player"
               frameBorder="1"
+              controls="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>{" "}

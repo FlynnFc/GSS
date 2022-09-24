@@ -3,6 +3,7 @@ import { useTable, useSortBy } from "react-table";
 import VideoEmbed from "./videoEmbed";
 import { BiPause, BiPlay } from "react-icons/bi";
 import { BsArrowDownUp } from "react-icons/bs";
+import toast, { Toaster } from "react-hot-toast";
 const td = require("tinyduration");
 
 import tmi from "tmi.js";
@@ -22,7 +23,6 @@ export default function TableTwitch() {
   const [chatMessages, setChatMessages] = useState([]);
   const [urlChecker, setURLChecker] = useState(new Set());
   const [saveModalOpen, setSaveModalOpen] = useState(false);
-  const [favv, setFav] = useState(false);
   const [favList, setFavList] = useState([]);
   const [paused, setPaused] = useState(false);
   const [urlCheck, setUrlCheck] = useState(new Set());
@@ -189,12 +189,17 @@ export default function TableTwitch() {
     useTable({ columns, data: submissiondata }, useSortBy);
 
   const savedModalHandler = () => {
-    setSaveModalOpen(true);
+    if (!submissions.length) {
+      toast.error("You have not saved any videos yet!", {
+        style: { fontSize: "1.1rem" },
+      });
+    } else setSaveModalOpen(true);
   };
 
   return (
     <div className="h-full">
       <div className="flex justify-center text-3xl">
+        <Toaster></Toaster>
         <div className="bg-slate-700 m-2 fixed right-3 text-white text-6xl top-0 flex items-center">
           <p
             className="text-lg bg-blue-500 rounded text-white font-bold px-2 cursor-pointer"
