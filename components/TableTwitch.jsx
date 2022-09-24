@@ -8,7 +8,6 @@ const td = require("tinyduration");
 import tmi from "tmi.js";
 import Thumbnail from "./Thumbnail";
 import Chatter from "./Chatter";
-import Fav from "./fav";
 import { SavedVideos } from "./SavedVideos";
 
 const defaultChannel = "notthemarmite";
@@ -196,9 +195,9 @@ export default function TableTwitch() {
   return (
     <div className="h-full">
       <div className="flex justify-center text-3xl">
-        <div className="bg-slate-700 rounded-lg m-2 fixed right-3 text-white text-6xl top-0 flex items-center">
+        <div className="bg-slate-700 m-2 fixed right-3 text-white text-6xl top-0 flex items-center">
           <p
-            className="text-lg bg-yellow-500 rounded text-white font-bold px-2 cursor-pointer"
+            className="text-lg bg-blue-500 rounded text-white font-bold px-2 cursor-pointer"
             onClick={savedModalHandler}
           >
             View saved videos
@@ -218,12 +217,15 @@ export default function TableTwitch() {
           )}
         </div>
       </div>
-      <div className="flex justify-center items-baseline text-white w-full bg-slate-200 mt-28">
-        <table {...getTableProps()} className="w-11/12 shadow-lg mb-8">
+      <div className="flex justify-center items-baseline text-white w-full bg-none mt-28">
+        <table
+          {...getTableProps()}
+          className="w-11/12 mb-8 bg-transparent shadow"
+        >
           <thead>
             {headerGroups.map((headerGroup) => (
               <tr
-                className="transition-all rounded-t-xl"
+                className="transition-all"
                 key={headerGroup}
                 {...headerGroup.getHeaderGroupProps()}
               >

@@ -104,12 +104,12 @@ export const SavedVideos = (props) => {
     useTable({ columns, data: submissiondata });
 
   return (
-    <div className="z-40 bg-gray-800 h-[100vh] fixed left-0 top-0 w-[100vw] flex justify-center items-start text-4xl overflow-y-scroll">
+    <div className="z-40 bg-[#0f0f0fc0] h-[100vh] fixed left-0 top-0 w-[100vw] flex justify-center items-start text-4xl overflow-y-scroll">
       <VscChromeClose
         onClick={closeHandler}
-        className="fixed right-4 top-0 text-3xl cursor-pointer"
+        className="fixed right-4 top-0 text-3xl cursor-pointer bg-blue-500 rounded"
       />
-      <table {...getTableProps()} className="w-11/12 shadow-lg mb-8 mt-10">
+      <table {...getTableProps()} className="w-8/12 shadow-lg mb-8 mt-10">
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr
@@ -119,7 +119,7 @@ export const SavedVideos = (props) => {
             >
               {headerGroup.headers.map((column) => (
                 <th
-                  className="text-white text-xl py-4 bg-yellow-500"
+                  className="text-white text-xl py-4 bg-blue-500"
                   key={column.Cell}
                   {...column.getHeaderProps()}
                 >
