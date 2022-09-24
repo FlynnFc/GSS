@@ -13,68 +13,60 @@ export const SavedVideos = (props) => {
 
   const [favSubs, setFavSubs] = useState([]);
   const [dupChecker, setDupChecker] = useState(new Set());
-
+  const [firstLoad, setFristLoad] = useState(true);
   useEffect(() => {
     const subMitter = async (url) => {
-      if (dupChecker.has(url)) {
-        console.log("Dup Found exiting submitted");
-        return;
-      } else if (!dupChecker.has(url)) {
-        console.log("No dup Found");
-        setDupChecker((prevState) => new Set([...prevState, url]));
-        const ytfetchurl = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&part=snippet&id=${url}&key=AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4`;
-        fetch(ytfetchurl)
-          .then((res) => {
-            if (res.ok) {
-              return res.json();
-            }
-            throw response;
-          })
-          .then((data) => {
-            const title = data.items[0].snippet.title;
-            const iframe = <FavVideoEmbed src={url} />;
-            const thumbnail = (
-              <Thumbnail
-                url={url}
-                src={data.items[0].snippet.thumbnails.medium.url}
-              />
-            );
+      const ytfetchurl = `https://youtube.googleapis.com/youtube/v3/videos?part=contentDetails&part=snippet&id=${url}&key=AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4`;
+      fetch(ytfetchurl)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          throw response;
+        })
+        .then((data) => {
+          const title = data.items[0].snippet.title;
+          const iframe = <FavVideoEmbed src={url} />;
+          const thumbnail = (
+            <Thumbnail
+              url={url}
+              src={data.items[0].snippet.thumbnails.medium.url}
+            />
+          );
 
-            const channel = data.items[0].snippet.channelTitle;
+          const channel = data.items[0].snippet.channelTitle;
 
-            const videoDuration = td.parse(
-              data.items[0].contentDetails.duration
-            );
-            const videoLength = `${
-              videoDuration.minutes > 0 ? videoDuration.minutes : 0
-            } mins ${
-              videoDuration.seconds > 0 ? videoDuration.seconds : 0
-            } secs`;
+          const videoDuration = td.parse(data.items[0].contentDetails.duration);
+          const videoLength = `${
+            videoDuration.minutes > 0 ? videoDuration.minutes : 0
+          } mins ${videoDuration.seconds > 0 ? videoDuration.seconds : 0} secs`;
 
-            setFavSubs((prev) => {
-              if (dupChecker.has(title)) {
-                return [...prev];
-              } else if (!prev[0] || prev[prev.length - 1].title !== title) {
-                return [
-                  ...prev,
-                  {
-                    title,
-                    iframe,
-                    videoLength,
-                    channel,
-                    thumbnail,
-                  },
-                ];
-              } else return [...prev];
-            });
+          setFavSubs((prev) => {
+            return [
+              ...prev,
+              {
+                title,
+                iframe,
+                videoLength,
+                channel,
+                thumbnail,
+              },
+            ];
           });
-      }
+        });
     };
-    props.urlCheck.forEach((element) => {
-      subMitter(element);
-    });
+    if (!firstLoad) {
+      props.urlCheck.forEach((element) => {
+        console.log(dupChecker, element);
+        if (!dupChecker.has(element)) {
+          setDupChecker((prevState) => new Set([...prevState, element]));
+          setTimeout(() => subMitter(element), 50);
+        }
+      });
+    } else setFristLoad(() => false);
+
     console.log(dupChecker);
-  }, [dupChecker, props.urlCheck]);
+  }, [dupChecker, firstLoad, props.urlCheck]);
   console.log(favSubs);
   const submissiondata = useMemo(() => [...favSubs], [favSubs]);
 
