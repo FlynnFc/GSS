@@ -24,8 +24,9 @@ export default function TableTwitch() {
   const [urlChecker, setURLChecker] = useState(new Set());
   const [saveModalOpen, setSaveModalOpen] = useState(false);
   const [favv, setFav] = useState(false);
-  const [favList, setFavList] = useState(new Set());
+  const [favList, setFavList] = useState([]);
   const [paused, setPaused] = useState(false);
+  const [urlCheck, setUrlCheck] = useState(new Set());
 
   useEffect(() => {
     (async () => {
@@ -35,7 +36,6 @@ export default function TableTwitch() {
   }, []);
 
   useEffect(() => {
-    console.log(favList);
     const subMitter = async (tags, url, message) => {
       if (
         message.includes("https://www.youtube.com/") ||
@@ -52,7 +52,13 @@ export default function TableTwitch() {
           })
           .then((data) => {
             const iframe = (
-              <VideoEmbed src={url} setFavList={setFavList} favList={favList} />
+              <VideoEmbed
+                src={url}
+                setFavList={setFavList}
+                favList={favList}
+                setUrlCheck={setUrlCheck}
+                urlCheck={urlCheck}
+              />
             );
             const thumbnail = (
               <Thumbnail
@@ -90,15 +96,12 @@ export default function TableTwitch() {
                 ? `0${submittedTime.getSeconds()}`
                 : submittedTime.getSeconds();
             let time = `${hours}:${minutes}:${seconds}`;
-            let isFav = false;
-            let fav = <Fav setFav={setFav} />;
+
             setSubmissions((prev) => {
               if (!prev[0] || prev[prev.length - 1].title !== title) {
                 return [
                   ...prev,
                   {
-                    isFav,
-                    fav,
                     title,
                     iframe,
                     videoLength,
@@ -137,7 +140,7 @@ export default function TableTwitch() {
     }
 
     return () => client.off("message", messageHandler);
-  }, [favList, isClientReady, paused, submissions, urlChecker]);
+  }, [favList, isClientReady, paused, submissions, urlCheck, urlChecker]);
 
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
 
@@ -171,10 +174,6 @@ export default function TableTwitch() {
         Header: "Time Submitted",
         accessor: "time",
       },
-      {
-        Header: "Save",
-        accessor: "fav",
-      },
     ],
     []
   );
@@ -206,6 +205,8 @@ export default function TableTwitch() {
           </p>
           {saveModalOpen ? (
             <SavedVideos
+              urlCheck={urlCheck}
+              favList={favList}
               submissions={submissions}
               setSaveModalOpen={setSaveModalOpen}
             ></SavedVideos>
@@ -257,7 +258,7 @@ export default function TableTwitch() {
                   {row.cells.map((cell) => {
                     return (
                       <td
-                        className="bg-white text-center border-b text-slate-900 font-semibold text-xl"
+                        className="bg-white text-center border-b text-slate-900 font-semibold text-xl ab"
                         key={cell.value}
                         {...cell.getCellProps()}
                       >

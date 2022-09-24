@@ -2,46 +2,16 @@ import React, { useState } from "react";
 import { AiFillEye, AiOutlineCloseCircle } from "react-icons/ai";
 import { AiOutlineStar, AiFillStar } from "react-icons/ai";
 
-const VideoEmbed = (props) => {
+const FavVideoEmbed = (props) => {
   const [ishidden, setHidden] = useState(true);
   const [isFav, setIsFav] = useState(false);
 
-  const favHandlerOn = () => {
-    const url = props.src;
-    if (!props.urlCheck.has(url)) {
-      props.setFavList((prev) => [url, ...prev]);
-      props.setUrlCheck((prev) => new Set([url, ...prev]));
-    }
-    setIsFav(true);
-  };
-  const favHandlerOff = () => {
-    props.setUrlCheck((prev) => {
-      const newSet = new Set([...prev]);
-      newSet.delete(props.src);
-      return new Set([...newSet]);
-    });
-    setIsFav(false);
-  };
   const hiddenhandler = () => {
     setHidden((prevState) => !prevState);
   };
 
   return (
-    <div className="flex justify-center items-center">
-      {" "}
-      {isFav ? (
-        <AiFillStar
-          className="cursor-pointer"
-          onClick={favHandlerOff}
-          id="fav"
-        />
-      ) : (
-        <AiOutlineStar
-          className="cursor-pointer"
-          onClick={favHandlerOn}
-          id="notFav"
-        />
-      )}
+    <div className="flex justify-center items-start">
       <div className="flex justify-center items-start">
         {ishidden ? (
           <AiFillEye className="cursor-pointer" onClick={hiddenhandler} />
@@ -51,8 +21,8 @@ const VideoEmbed = (props) => {
               className={`${
                 ishidden ? "hidden" : "visible"
               } z-10 transition-all overflow-hidden`}
-              width="220"
-              height="124"
+              width="426"
+              height="240"
               src={`https://www.youtube.com/embed/${props.src}`}
               title="YouTube video player"
               frameBorder="1"
@@ -69,4 +39,4 @@ const VideoEmbed = (props) => {
     </div>
   );
 };
-export default VideoEmbed;
+export default FavVideoEmbed;
