@@ -180,10 +180,16 @@ export default function TableTwitch() {
 
   const pauseOff = () => {
     setPaused(() => false);
+    toast.success("Submissions Resumed", {
+      style: { fontSize: "1.1rem" },
+    });
   };
 
   const pauseOn = (e) => {
     setPaused(() => true);
+    toast.success("Submissions Pasued", {
+      style: { fontSize: "1.1rem" },
+    });
   };
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =

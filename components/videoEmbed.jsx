@@ -51,12 +51,11 @@ const VideoEmbed = (props) => {
               className={`${
                 ishidden ? "hidden" : "visible"
               } z-10 transition-all overflow-hidden`}
-              width="220"
-              height="124"
+              width="240"
+              height="138"
               src={`https://www.youtube.com/embed/${props.src}`}
               title="YouTube video player"
               frameBorder="1"
-              controls="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>{" "}
