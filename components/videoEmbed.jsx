@@ -50,7 +50,7 @@ const VideoEmbed = (props) => {
             <iframe
               className={`${
                 ishidden ? "hidden" : "visible"
-              } z-10 transition-all overflow-hidden`}
+              } z-2 transition-all overflow-hidden`}
               width="240"
               height="138"
               src={`https://www.youtube.com/embed/${props.src}`}

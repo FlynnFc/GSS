@@ -207,9 +207,9 @@ export default function TableTwitch() {
     <div className="h-full">
       <div className="flex justify-center text-3xl">
         <Toaster></Toaster>
-        <div className="bg-slate-700 m-2 fixed right-3 text-white text-6xl top-0 flex items-center">
+        <div className="bg-slate-700 m-2 fixed right-3 text-white text-6xl top-0 flex items-center z-10">
           <p
-            className="text-lg bg-blue-500 rounded text-white font-bold px-2 cursor-pointer"
+            className="text-lg bg-blue-500 rounded text-white font-bold px-2 cursor-pointer "
             onClick={savedModalHandler}
           >
             View saved videos

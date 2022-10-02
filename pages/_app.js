@@ -3,7 +3,7 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className="bg-slate-200 h-screen">
+    <div className="bg-slate-200 h-full">
       <Head>
         <title>GSS Dashboad</title>
       </Head>
