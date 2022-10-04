@@ -11,7 +11,7 @@ import Thumbnail from "./Thumbnail";
 import Chatter from "./Chatter";
 import { SavedVideos } from "./SavedVideos";
 
-const defaultChannel = "notthemarmite";
+const defaultChannel = "lutafatootoo";
 
 const client = new tmi.Client({
   channels: [defaultChannel, "atrioc"],
