@@ -10,7 +10,6 @@ import tmi from "tmi.js";
 import Thumbnail from "./Thumbnail";
 import Chatter from "./Chatter";
 import { SavedVideos } from "./SavedVideos";
-import VideoTitle from "./VideoTitle";
 
 const defaultChannel = "lutafatootoo";
 
@@ -72,7 +71,7 @@ export default function TableTwitch() {
             const chatter = (
               <Chatter color={tags.color} username={tags.username} />
             );
-            const title = <VideoTitle title={data.items[0].snippet.title} />;
+            const title = data.items[0].snippet.title;
             // const chatter = tags.username;
             const channel = data.items[0].snippet.channelTitle;
 
@@ -206,7 +205,7 @@ export default function TableTwitch() {
 
   return (
     <div className="h-full">
-      <div className="flex justify-center text-4xl">
+      <div className="flex justify-center text-3xl">
         <Toaster></Toaster>
         <div className="bg-slate-700 m-2 fixed right-3 text-white text-6xl top-0 flex items-center z-10">
           <p
@@ -233,7 +232,7 @@ export default function TableTwitch() {
       <div className="flex justify-center items-baseline text-white w-full bg-none mt-28">
         <table
           {...getTableProps()}
-          className="w-11/12 mb-8 bg-transparent shadow text-2xl"
+          className="w-11/12 mb-8 bg-transparent shadow"
         >
           <thead>
             {headerGroups.map((headerGroup) => (
@@ -273,7 +272,7 @@ export default function TableTwitch() {
                   {row.cells.map((cell) => {
                     return (
                       <td
-                        className="bg-white text-center border-b text-slate-900 font-semibold text-2xl max-w-md"
+                        className="bg-white text-center border-b text-slate-900 font-semibold text-xl ab"
                         key={cell.value}
                         {...cell.getCellProps()}
                       >
