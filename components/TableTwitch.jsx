@@ -129,12 +129,11 @@ export default function TableTwitch() {
         /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
       let match = message.match(regExp);
       const url = match && match[7].length == 11 ? match[7] : false;
-
+      setURLChecker((prev) => new Set([url, ...prev]));
       if (!urlChecker.has(url)) {
         setChatMessages((prev) => [{ channel, tags, message }, ...prev]);
-        setTimeout(() => subMitter(tags, url, message), 10);
+        subMitter(tags, url, message);
       }
-      setURLChecker((prev) => new Set([url, ...prev]));
     };
 
     if (isClientReady) {
@@ -146,7 +145,6 @@ export default function TableTwitch() {
 
   const submissiondata = React.useMemo(() => [...submissions], [submissions]);
 
-  console.log(submissions);
   const columns = React.useMemo(
     () => [
       {
@@ -235,7 +233,7 @@ export default function TableTwitch() {
       <div className="flex justify-center items-baseline text-white w-full bg-none mt-28">
         <table
           {...getTableProps()}
-          className="w-[95%] mb-8 bg-transparent shadow text-2xl"
+          className="w-11/12 mb-8 bg-transparent shadow text-2xl"
         >
           <thead>
             {headerGroups.map((headerGroup) => (
