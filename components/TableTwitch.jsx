@@ -174,6 +174,10 @@ export default function TableTwitch() {
         Header: "Time Submitted",
         accessor: "time",
       },
+      {
+        Header: "",
+        accessor: "star",
+      },
     ],
     []
   );
@@ -232,7 +236,7 @@ export default function TableTwitch() {
       <div className="flex justify-center items-baseline text-white w-full bg-none mt-28">
         <table
           {...getTableProps()}
-          className="w-11/12 mb-8 bg-transparent shadow"
+          className="w-[96%] mb-8 bg-transparent shadow"
         >
           <thead>
             {headerGroups.map((headerGroup) => (
@@ -272,7 +276,7 @@ export default function TableTwitch() {
                   {row.cells.map((cell) => {
                     return (
                       <td
-                        className="bg-white text-center border-b text-slate-900 font-semibold text-xl ab"
+                        className="bg-white text-center border-b text-slate-900 font-semibold text-2xl max-w-sm"
                         key={cell.value}
                         {...cell.getCellProps()}
                       >
