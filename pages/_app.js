@@ -3,7 +3,7 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className="bg-slate-200 h-full min-h-[100vh]">
+    <div className="bg-neutral h-full min-h-[100vh]">
       <Head>
         <title>GSS Dashboad</title>
       </Head>

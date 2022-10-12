@@ -211,7 +211,7 @@ export default function TableTwitch() {
     <div className="h-full">
       <div className="flex justify-center text-3xl">
         <Toaster></Toaster>
-        <div className="bg-slate-700 m-2 fixed right-3 text-white text-6xl top-0 flex items-center z-10">
+        <div className="bg-base-300 m-2 fixed right-3 text-white text-6xl top-0 flex items-center z-10">
           <p
             className="text-lg bg-blue-500 rounded text-white font-bold px-2 cursor-pointer "
             onClick={savedModalHandler}
@@ -236,7 +236,7 @@ export default function TableTwitch() {
       <div className="flex justify-center items-baseline text-white w-full bg-none mt-28">
         <table
           {...getTableProps()}
-          className="w-[96%] mb-8 bg-transparent shadow"
+          className="w-[96%] mb-8 bg-transparent shadow bg-base-300 "
         >
           <thead>
             {headerGroups.map((headerGroup) => (
@@ -247,7 +247,7 @@ export default function TableTwitch() {
               >
                 {headerGroup.headers.map((column) => (
                   <th
-                    className="text-white text-xl py-4 bg-slate-700"
+                    className="text-xl py-4 "
                     key={column.Cell}
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
@@ -276,7 +276,7 @@ export default function TableTwitch() {
                   {row.cells.map((cell) => {
                     return (
                       <td
-                        className="bg-white text-center border-b text-slate-900 font-semibold text-2xl max-w-sm"
+                        className=" text-center border-b border-base-300 text-white bg-base-100 font-semibold text-2xl max-w-sm"
                         key={cell.value}
                         {...cell.getCellProps()}
                       >

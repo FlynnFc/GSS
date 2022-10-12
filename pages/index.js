@@ -6,7 +6,7 @@ import pepoG from "../components/images/3x.png";
 export default function Home() {
   return (
     <div className="h-full">
-      <div className="text-3xl text-center py-5 font-bold text-white fixed top-0 bg-slate-700 w-full flex justify-center items-center z-10">
+      <div className="text-3xl text-center py-5 font-bold text-white fixed top-0 bg-base-300 w-full flex justify-center items-center z-10">
         <h1>Get Smarter Saturday Submissions</h1>
         <a
           className="ml-4"

@@ -134,7 +134,7 @@ export const SavedVideos = (props) => {
                 {row.cells.map((cell) => {
                   return (
                     <td
-                      className="bg-white text-center border-b text-slate-900 font-semibold text-xl"
+                      className="bg-base-100 text-center border-b border-base-300 text-white font-semibold text-xl"
                       key={cell.value}
                       {...cell.getCellProps()}
                     >
