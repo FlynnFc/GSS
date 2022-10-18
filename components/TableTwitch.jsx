@@ -236,7 +236,7 @@ export default function TableTwitch() {
       <div className="flex justify-center items-baseline text-white w-full bg-none mt-28">
         <table
           {...getTableProps()}
-          className="w-[96%] mb-8 bg-transparent shadow bg-base-300 "
+          className="w-[96%] mb-8 bg-transparent shadow bg-base-200 "
         >
           <thead>
             {headerGroups.map((headerGroup) => (
