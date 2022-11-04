@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 th:last-child {
-  margin-right: 3rem;
+  padding-right: 0.5rem;
   border-top-right-radius: 5px;
 }
 th:first-child {

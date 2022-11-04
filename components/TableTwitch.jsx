@@ -106,7 +106,6 @@ export default function TableTwitch() {
                     iframe,
                     videoLength,
                     chatter,
-                    time,
                     channel,
                     thumbnail,
                   },
@@ -171,11 +170,7 @@ export default function TableTwitch() {
         accessor: "chatter",
       },
       {
-        Header: "Time Submitted",
-        accessor: "time",
-      },
-      {
-        Header: "",
+        Header: "Save",
         accessor: "star",
       },
     ],
@@ -247,7 +242,7 @@ export default function TableTwitch() {
               >
                 {headerGroup.headers.map((column) => (
                   <th
-                    className="text-xl py-4 "
+                    className="text-xl py-4 px-1 "
                     key={column.Cell}
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
