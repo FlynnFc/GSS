@@ -31,13 +31,13 @@ const VideoEmbed = (props) => {
       {" "}
       {isFav ? (
         <AiFillStar
-          className="cursor-pointer absolute right-[3%]"
+          className="cursor-pointer absolute right-[4%]"
           onClick={favHandlerOff}
           id="fav"
         />
       ) : (
         <AiOutlineStar
-          className="cursor-pointer absolute right-[3%]"
+          className="cursor-pointer absolute right-[4%]"
           onClick={favHandlerOn}
           id="notFav"
         />
