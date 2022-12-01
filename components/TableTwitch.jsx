@@ -12,12 +12,11 @@ import Chatter from "./Chatter";
 import { SavedVideos } from "./SavedVideos";
 
 const defaultChannel = "lutafatootoo";
-
 const client = new tmi.Client({
   channels: [defaultChannel, "atrioc"],
 });
 
-export default function TableTwitch() {
+export default function TableTwitch(props) {
   const [submissions, setSubmissions] = useState([]);
   const [isClientReady, setIsClientReady] = useState(false);
   const [chatMessages, setChatMessages] = useState([]);
