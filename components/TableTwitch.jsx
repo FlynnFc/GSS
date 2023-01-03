@@ -37,7 +37,7 @@ export default function TableTwitch(props) {
       await client.connect();
       setIsClientReady(true);
     })();
-  }, []);
+  }, [client]);
 
   useEffect(() => {
     const key = "AIzaSyBJt6r8FfI6zvJluYPdFPROOid0IFQ3xF4";
