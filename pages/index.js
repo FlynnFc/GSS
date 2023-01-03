@@ -45,7 +45,7 @@ export default function Home() {
             <input
               onChange={(e) => setTwitchUsername(e.target.value)}
               placeholder="username"
-              className="p-3 text-xl rounded-md text-base-300"
+              className="p-3 text-xl rounded-md text-base-300 font-bold"
               value={twitchUsername}
               type="text"
             />
