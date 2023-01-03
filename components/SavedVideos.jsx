@@ -122,7 +122,7 @@ export const SavedVideos = (props) => {
             </tr>
           ))}
         </thead>
-        <tbody {...getTableBodyProps()}>
+        <tbody className="rounded-b-lg" {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
             return (
@@ -146,7 +146,7 @@ export const SavedVideos = (props) => {
             );
           })}
         </tbody>
-      </table>{" "}
+      </table>
       <VscChromeClose
         onClick={closeHandler}
         className="top-[2.3%] right-[2%] text-3xl cursor-pointer bg-red-500 rounded shadow-lg mt-10 ml-5"

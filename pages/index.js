@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [twitchUsername, setTwitchUsername] = useState("");
-  const [hasChannel, setHasChannel] = useState(true);
+  const [hasChannel, setHasChannel] = useState(false);
   const submitHander = (e) => {
     e.preventDefault();
     setHasChannel(true);
@@ -31,22 +31,26 @@ export default function Home() {
         </a>
       </div>
       {!hasChannel && (
-        <div className="w-full h-[100vh] justify-center items-center flex">
+        <div className="w-full h-[100vh] justify-center items-center flex ">
           <form
             onSubmit={(e) => submitHander(e)}
-            className="bg-base-300 p-6 flex flex-col space-y-4"
+            className="bg-base-300 p-7 px-9 flex flex-col space-y-4 rounded-lg"
           >
-            <h2 className="text-3xl font-bold py-2">Enter your channel name</h2>
-            <label className="text-xl">twitch.tv/username</label>
+            <h2 className="text-3xl font-bold py-2 mb-3">
+              Enter your channel name
+            </h2>
+            <label className="text-xl">
+              twitch.tv/<b>username</b>
+            </label>
             <input
               onChange={(e) => setTwitchUsername(e.target.value)}
               placeholder="username"
-              className="p-3 text-xl rounded-md"
+              className="p-3 text-xl rounded-md text-base-300"
               value={twitchUsername}
               type="text"
             />
             <button type="submit" className="btn-xl btn btn-primary">
-              Submit
+              Connect
             </button>
           </form>
         </div>

@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useTable, useSortBy } from "react-table";
 import VideoEmbed from "./videoEmbed";
 import { BiPause, BiPlay } from "react-icons/bi";
 import { BsArrowDownUp } from "react-icons/bs";
 import toast, { Toaster } from "react-hot-toast";
 const td = require("tinyduration");
-
 import tmi from "tmi.js";
 import Thumbnail from "./Thumbnail";
 import Chatter from "./Chatter";
 import { SavedVideos } from "./SavedVideos";
 
 const defaultChannel = "lutafatootoo";
-const client = new tmi.Client({
-  channels: [defaultChannel, "atrioc"],
-});
+
+// const client = new tmi.Client({
+//   channels: [defaultChannel, "atrioc"],
+// });
 
 export default function TableTwitch(props) {
+  const client = useMemo(
+    () =>
+      new tmi.Client({
+        channels: [props.channel],
+      }),
+    [props.channel]
+  );
   const [submissions, setSubmissions] = useState([]);
   const [isClientReady, setIsClientReady] = useState(false);
   const [chatMessages, setChatMessages] = useState([]);
@@ -25,7 +32,6 @@ export default function TableTwitch(props) {
   const [favList, setFavList] = useState([]);
   const [paused, setPaused] = useState(false);
   const [urlCheck, setUrlCheck] = useState(new Set());
-
   useEffect(() => {
     (async () => {
       await client.connect();
