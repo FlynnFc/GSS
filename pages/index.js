@@ -36,7 +36,7 @@ export default function Home() {
             onSubmit={(e) => submitHander(e)}
             className="bg-base-300 p-7 px-9 flex flex-col space-y-4 rounded-lg"
           >
-            <h2 className="text-3xl font-bold py-2 mb-3">
+            <h2 className="text-3xl font-bold py-2 mb-3 text-white">
               Enter your channel name
             </h2>
             <label className="text-xl">
@@ -49,7 +49,10 @@ export default function Home() {
               value={twitchUsername}
               type="text"
             />
-            <button type="submit" className="btn-xl btn btn-primary">
+            <button
+              type="submit"
+              className="btn-xl btn text-xl tracking-wide btn-primary"
+            >
               Connect
             </button>
           </form>
