@@ -247,12 +247,12 @@ export default function TableTwitch(props) {
               >
                 {headerGroup.headers.map((column) => (
                   <th
-                    className="text-xl py-4 px-1 "
+                    className="text-xl py-4 px-1 box-content"
                     key={column.Cell}
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
                     {column.render("Header")}
-                    <span>
+                    <span className="absolute">
                       {column.isSorted
                         ? column.isSortedDesc
                           ? " 🔽"
