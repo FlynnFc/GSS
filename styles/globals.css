@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  font-family: "Open Sans", sans-serif;
-}
-
 th:last-child {
   padding-right: 0.5rem;
   border-top-right-radius: 5px;
