@@ -9,12 +9,7 @@ import tmi from "tmi.js";
 import Thumbnail from "./Thumbnail";
 import Chatter from "./Chatter";
 import { SavedVideos } from "./SavedVideos";
-
-const defaultChannel = "lutafatootoo";
-
-// const client = new tmi.Client({
-//   channels: [defaultChannel, "atrioc"],
-// });
+import Channel from "./Channel";
 
 export default function TableTwitch(props) {
   const client = useMemo(
@@ -78,7 +73,12 @@ export default function TableTwitch(props) {
             );
             const title = data.items[0].snippet.title;
             // const chatter = tags.username;
-            const channel = data.items[0].snippet.channelTitle;
+            const channel = (
+              <Channel
+                channelId={data.items[0].snippet.channelId}
+                username={data.items[0].snippet.channelTitle}
+              />
+            );
 
             const videoDuration = td.parse(
               data.items[0].contentDetails.duration
@@ -88,19 +88,22 @@ export default function TableTwitch(props) {
             } mins ${
               videoDuration.seconds > 0 ? videoDuration.seconds : 0
             } secs`;
-            const hours =
-              submittedTime.getHours() < 10
-                ? `0${submittedTime.getHours()}`
-                : submittedTime.getHours();
-            const minutes =
-              submittedTime.getMinutes() < 10
-                ? `0${submittedTime.getMinutes()}`
-                : submittedTime.getMinutes();
-            const seconds =
-              submittedTime.getSeconds() < 10
-                ? `0${submittedTime.getSeconds()}`
-                : submittedTime.getSeconds();
-            let time = `${hours}:${minutes}:${seconds}`;
+
+            //When User submitted
+            //
+            // const hours =
+            //   submittedTime.getHours() < 10
+            //     ? `0${submittedTime.getHours()}`
+            //     : submittedTime.getHours();
+            // const minutes =
+            //   submittedTime.getMinutes() < 10
+            //     ? `0${submittedTime.getMinutes()}`
+            //     : submittedTime.getMinutes();
+            // const seconds =
+            //   submittedTime.getSeconds() < 10
+            //     ? `0${submittedTime.getSeconds()}`
+            //     : submittedTime.getSeconds();
+            // let time = `${hours}:${minutes}:${seconds}`;
 
             setSubmissions((prev) => {
               if (!prev[0] || prev[prev.length - 1].title !== title) {
@@ -251,6 +254,13 @@ export default function TableTwitch(props) {
                     key={column.Cell}
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                   >
+                    <div>
+                      {/* <div>
+                        {column.Header === "Length"
+                          ? column.render("Filter")
+                          : null}
+                      </div> */}
+                    </div>
                     {column.render("Header")}
                     <span className="absolute">
                       {column.isSorted
