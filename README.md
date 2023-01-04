@@ -29,7 +29,6 @@ To clone and run this application, you'll need [Git](https://git-scm.com) and [N
 $ git clone https://github.com/FlynnFc/GSS
 
 # Go into the repository
-$ cd electron-markdownify
 
 # Install dependencies
 $ npm install
